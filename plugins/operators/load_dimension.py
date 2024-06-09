@@ -78,8 +78,8 @@ class LoadDimensionOperator(BaseOperator):
         logging.info("##### Connecting to Redshift #####")
         redshift = PostgresHook(self.redshift_conn_id)
 
-        logging.info(f"##### Dropping {self.table} if it already exists #####")
-        redshift.run(f"DROP TABLE IF EXISTS {self.table}")
+        logging.info(f"##### Truncating {self.table} if it already exists #####")
+        redshift.run(f"TRUNCATE TABLE IF EXISTS {self.table}")
 
         logging.info(f"##### Creating {self.table} #####")
         if self.table == 'users':
